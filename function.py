@@ -10,9 +10,10 @@ def AJI(target,pred):
     target_label = label(target)
     C = 0
     U = 0
-    Unused = np.ones(pred_label.max()-1)
+    Unused = np.ones(pred_label.max())
     for i in range(1,max(np.unique(target_label))+1):
-        options = np.unique(pred_label[(i==target_label) & (pred_label!=0)])
+        options = np.unique(pred_label[(i==target_label)])
+        options = np.setdiff1d(options, np.array([0]))
         cur_score = 0
         if np.shape(options)[0]>0:
             for j in options:
